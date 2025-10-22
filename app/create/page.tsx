@@ -16,9 +16,9 @@ export default async function CreatePage() {
     <div className="min-h-screen bg-background py-12">
       <div className="container mx-auto max-w-2xl px-4">
         <div className="mb-8 text-center">
-          <h1 className="mb-3 text-4xl font-bold">Create Digital Product</h1>
+          <h1 className="mb-3 text-4xl font-bold">Create Your Product</h1>
           <p className="text-lg text-muted-foreground">
-            Upload your product details and start accepting USDC payments on Base
+            Add your product details and get a shareable payment link to accept USDC on Base
           </p>
         </div>
         <CreateProductForm />
