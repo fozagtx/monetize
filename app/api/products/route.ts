@@ -49,9 +49,26 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const supabase = await getSupabaseServerClient()
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get("id")
+
+    if (id) {
+      const { data: product, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("id", id)
+        .single()
+
+      if (error) {
+        console.error("[v0] Error fetching product:", error)
+        return NextResponse.json({ error: "Product not found" }, { status: 404 })
+      }
+
+      return NextResponse.json(product)
+    }
 
     const { data: products, error } = await supabase
       .from("products")

@@ -3,7 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { BasePayButton } from "@/components/base-pay-button"
+import { CopyLinkButton } from "@/components/copy-link-button"
 import { CheckCircle2, ExternalLink, Shield, Zap } from "lucide-react"
+import { getSupabaseServerClient } from "@/lib/supabase/server"
 
 async function getProduct(id: string) {
   try {
@@ -14,8 +16,7 @@ async function getProduct(id: string) {
       },
     )
     if (!response.ok) return null
-    const products = await response.json()
-    return products.find((p: any) => p.id === id)
+    return await response.json()
   } catch (error) {
     console.error("[v0] Error fetching product:", error)
     return null
@@ -29,6 +30,14 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   if (!product) {
     notFound()
   }
+
+  const supabase = await getSupabaseServerClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const isCreator = user && product.user_id === user.id
+  const productUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/product/${id}`
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -113,39 +122,59 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
             <Separator />
 
-            {/* Payment Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Purchase with USDC</CardTitle>
-                <CardDescription>Pay securely on Base network</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <BasePayButton
-                  productId={product.id}
-                  productTitle={product.title}
-                  recipient={product.payment_address}
-                  amount={product.price_usdc}
-                  onSuccess={(txHash) => {
-                    // Show success message and product URL
-                    alert(
-                      `Payment successful! Transaction: ${txHash}\n\nAccess your product at: ${product.product_url}`,
-                    )
-                    window.open(product.product_url, "_blank")
-                  }}
-                  onError={(error) => {
-                    alert(`Payment failed: ${error.message}`)
-                  }}
-                />
-
-                <div className="rounded-lg bg-muted p-3 text-sm text-muted-foreground">
-                  <p className="mb-1 font-medium text-foreground">After payment:</p>
-                  <div className="flex items-center gap-2">
-                    <ExternalLink className="h-4 w-4" />
-                    <span>You'll receive instant access to download your product</span>
+            {isCreator ? (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Your Product</CardTitle>
+                  <CardDescription>Share this payment link with your customers</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg border border-border bg-muted/50 p-4">
+                    <p className="mb-2 text-sm font-medium">Payment Link:</p>
+                    <p className="break-all font-mono text-sm text-muted-foreground">{productUrl}</p>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                  <CopyLinkButton url={productUrl} />
+                  <div className="rounded-lg bg-primary/5 p-3 text-sm">
+                    <p className="font-medium text-primary">✓ This is your product</p>
+                    <p className="mt-1 text-muted-foreground">
+                      Share the link above with customers so they can pay you with USDC
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Purchase with USDC</CardTitle>
+                  <CardDescription>Pay securely on Base network</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <BasePayButton
+                    productId={product.id}
+                    productTitle={product.title}
+                    recipient={product.payment_address}
+                    amount={product.price_usdc}
+                    onSuccess={(txHash) => {
+                      alert(
+                        `Payment successful! Transaction: ${txHash}\n\nAccess your product at: ${product.product_url}`,
+                      )
+                      window.open(product.product_url, "_blank")
+                    }}
+                    onError={(error) => {
+                      alert(`Payment failed: ${error.message}`)
+                    }}
+                  />
+
+                  <div className="rounded-lg bg-muted p-3 text-sm text-muted-foreground">
+                    <p className="mb-1 font-medium text-foreground">After payment:</p>
+                    <div className="flex items-center gap-2">
+                      <ExternalLink className="h-4 w-4" />
+                      <span>You'll receive instant access to download your product</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
