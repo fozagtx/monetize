@@ -22,15 +22,7 @@ export default async function ProductsPage() {
     <div className="flex flex-col">
       <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
         <SidebarTrigger className="-ml-1" />
-        <div className="flex flex-1 items-center justify-between">
-          <h1 className="text-xl font-semibold">My Products</h1>
-          <Button asChild>
-            <Link href="/create">
-              <Plus className="mr-2 h-4 w-4" />
-              Create Product
-            </Link>
-          </Button>
-        </div>
+        <h1 className="text-xl font-semibold">My Products</h1>
       </header>
 
       <div className="flex-1 space-y-6 p-6">
@@ -69,7 +61,7 @@ export default async function ProductsPage() {
                 Create your first product to start accepting payments
               </p>
               <Button asChild>
-                <Link href="/create">
+                <Link href="/dashboard/create">
                   <Plus className="mr-2 h-4 w-4" />
                   Create Product
                 </Link>

@@ -50,7 +50,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     {
       title: "Create Product",
       icon: Plus,
-      href: "/create",
+      href: "/dashboard/create",
     },
   ]
 
@@ -70,7 +70,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     : "U"
 
   return (
-    <Sidebar>
+    <Sidebar variant="floating" collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -91,12 +91,18 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={
+                      item.href === "/dashboard" 
+                        ? pathname === item.href 
+                        : pathname.startsWith(item.href)
+                    }
+                  >
                     <Link href={item.href}>
                       <item.icon className="size-4" />
                       <span>{item.title}</span>
