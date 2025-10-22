@@ -194,7 +194,7 @@ export function CreateProductForm() {
                 Creating Product…
               </>
             ) : (
-              "Create Product & Generate Payment Link"
+              "Add product"
             )}
           </Button>
         </form>
