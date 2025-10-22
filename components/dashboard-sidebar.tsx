@@ -50,7 +50,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     {
       title: "Create Product",
       icon: Plus,
-      href: "/create",
+      href: "/dashboard/create",
     },
   ]
 
@@ -70,33 +70,42 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     : "U"
 
   return (
-    <Sidebar>
+    <Sidebar variant="floating" collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Coins className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Monetize</span>
-                  <span className="truncate text-xs text-muted-foreground">Creator Platform</span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
+            <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+              <SidebarTrigger className="shrink-0" />
+              <SidebarMenuButton size="lg" asChild className="flex-1 group-data-[collapsible=icon]:hidden">
+                <Link href="/">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    <Coins className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">Monetize</span>
+                    <span className="truncate text-xs text-muted-foreground">Creator Platform</span>
+                  </div>
+                </Link>
+              </SidebarMenuButton>
+            </div>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={
+                      item.href === "/dashboard" 
+                        ? pathname === item.href 
+                        : pathname.startsWith(item.href)
+                    }
+                  >
                     <Link href={item.href}>
                       <item.icon className="size-4" />
                       <span>{item.title}</span>

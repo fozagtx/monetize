@@ -15,7 +15,7 @@ export default function NotFound() {
         </p>
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg">
-            <Link href="/marketplace">Browse Marketplace</Link>
+            <Link href="/dashboard">Go to Dashboard</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="/">Go Home</Link>

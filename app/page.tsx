@@ -26,14 +26,14 @@ export default async function HomePage() {
             <span className="sr-only">Back to home</span>
           </Link>
           <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 text-sm font-medium text-white/60 md:flex">
-            <Link href="#features" className="transition-colors hover:text-white">
+            <Link
+              href="#features"
+              className="transition-colors hover:text-white"
+            >
               Features
             </Link>
             <Link href="#docs" className="transition-colors hover:text-white">
               Docs
-            </Link>
-            <Link href="#company" className="transition-colors hover:text-white">
-              Company
             </Link>
           </div>
           <Link
@@ -46,14 +46,13 @@ export default async function HomePage() {
       </header>
 
       <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-24 pt-10 text-center md:px-8">
-        <p className="mb-6 text-sm uppercase tracking-[0.4em] text-white/50">
-          Built for Creators
-        </p>
         <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl">
           Monetize your skills
         </h1>
         <p className="mt-6 max-w-2xl text-pretty text-lg text-white/60 sm:text-xl">
-          Create products, get paid instantly. Share payment links and accept USDC on Base. Built for creators who want to monetize their expertise without the hassle.
+          {" "}
+          Built for creators who want to monetize their expertise without the
+          hassle.
         </p>
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
           <Button
@@ -65,14 +64,6 @@ export default async function HomePage() {
               Get Started
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
             </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="h-12 rounded-full border-white/15 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/10"
-          >
-            <Link href="#how">How It Works</Link>
           </Button>
         </div>
       </main>

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import { DashboardSidebar } from "@/components/dashboard-sidebar"
-import { SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 
 export default async function DashboardLayout({
   children,
@@ -19,12 +19,10 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full">
-        <DashboardSidebar user={user} />
-        <main className="flex-1">
-          {children}
-        </main>
-      </div>
+      <DashboardSidebar user={user} />
+      <SidebarInset>
+        {children}
+      </SidebarInset>
     </SidebarProvider>
   )
 }

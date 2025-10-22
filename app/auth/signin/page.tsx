@@ -1,4 +1,4 @@
-import { SignInForm } from "@/components/auth/signin-form"
+import { SignInForm } from "@/components/auth/signinForm";
 
 export default function SignInPage() {
   return (
@@ -6,10 +6,12 @@ export default function SignInPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold">Welcome back</h1>
-          <p className="mt-2 text-muted-foreground">Sign in to your Monetize account</p>
+          <p className="mt-2 text-muted-foreground">
+            Sign in to your Monetize account
+          </p>
         </div>
         <SignInForm />
       </div>
     </div>
-  )
+  );
 }
