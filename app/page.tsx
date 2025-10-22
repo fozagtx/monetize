@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Coins, Shield, Zap } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Coins, Shield, Zap } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -14,11 +14,10 @@ export default function HomePage() {
               Powered by Base
             </div>
             <h1 className="mb-6 text-balance text-5xl font-bold tracking-tight md:text-7xl">
-              Monetize your digital products with crypto
+              Monetize your Value
             </h1>
             <p className="mb-8 text-pretty text-lg text-muted-foreground md:text-xl">
-              Accept USDC payments on Base. No fees, no chargebacks, instant settlements. Create payment links in
-              seconds and start earning.
+              Turn you skills , and value into business with a simple link
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="gap-2">
@@ -44,7 +43,8 @@ export default function HomePage() {
               </div>
               <h3 className="mb-2 text-xl font-semibold">Instant Payments</h3>
               <p className="text-muted-foreground">
-                Payments settle in seconds on Base. No waiting days for bank transfers or payment processors.
+                Payments settle in seconds on Base. No waiting days for bank
+                transfers or payment processors.
               </p>
             </div>
             <div className="flex flex-col items-start">
@@ -53,7 +53,8 @@ export default function HomePage() {
               </div>
               <h3 className="mb-2 text-xl font-semibold">No Chargebacks</h3>
               <p className="text-muted-foreground">
-                Crypto payments are final. No risk of fraudulent chargebacks eating into your revenue.
+                Crypto payments are final. No risk of fraudulent chargebacks
+                eating into your revenue.
               </p>
             </div>
             <div className="flex flex-col items-start">
@@ -62,7 +63,8 @@ export default function HomePage() {
               </div>
               <h3 className="mb-2 text-xl font-semibold">Zero Platform Fees</h3>
               <p className="text-muted-foreground">
-                Keep 100% of your earnings. Only pay minimal gas fees on Base (pennies per transaction).
+                Keep 100% of your earnings. Only pay minimal gas fees on Base
+                (pennies per transaction).
               </p>
             </div>
           </div>
@@ -73,9 +75,12 @@ export default function HomePage() {
       <section className="py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 text-center md:p-12">
-            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">Ready to start earning?</h2>
+            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
+              Ready to start earning?
+            </h2>
             <p className="mb-8 text-pretty text-lg text-muted-foreground">
-              Create your first product listing in under a minute. No signup required.
+              Create your first product listing in under a minute. No signup
+              required.
             </p>
             <Button asChild size="lg" className="gap-2">
               <Link href="/create">
@@ -86,5 +91,5 @@ export default function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
