@@ -1,127 +1,160 @@
-# Monetize - Sell Digital Products with Crypto on Base
+# Monetize
 
-A platform for creators to monetize their digital products by accepting USDC payments on the Base blockchain.
+Platform for creators to monetize digital content and Discord communities with crypto payments on Base.
 
-## Features
+![Monetize Platform](/placeholder.svg?height=400&width=800&query=modern+crypto+payment+platform+dashboard)
 
-- 🔐 **Supabase Authentication** - Secure user authentication with email/password
-- 💰 **Base Payments** - Accept USDC payments on Base L2 with minimal gas fees
-- 🛍️ **Product Marketplace** - Browse and purchase digital products
-- 🔗 **Payment Links** - Generate shareable payment links for your products
-- 🔒 **Row Level Security** - Database security with Supabase RLS policies
-- ⚡ **Instant Settlements** - Payments settle in seconds on Base
+## Demo
 
-## Tech Stack
+[🎥 Watch Monetize in action](#)
 
-- **Framework**: Next.js 16 (App Router)
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth
-- **Blockchain**: Base (Ethereum L2)
-- **Payments**: USDC on Base via @base-org/account
-- **Styling**: Tailwind CSS v4
-- **UI Components**: Radix UI + shadcn/ui
+**Sell digital products and Discord access with recurring crypto payments on Base blockchain**
 
-## Setup Instructions
+![Screenshot](/placeholder.svg?height=600&width=1200&query=product+marketplace+with+discord+integration)
 
-### 1. Clone the Repository
+**So simple even your grandma can accept crypto payments 😌**
+
+## What It Does for Creators
+
+Monetize gives you powerful tools to turn your content and community into revenue:
+
+- **Digital Product Sales:** Upload and sell any digital product with one-time USDC payments
+- **Discord Community Access:** Sell access to exclusive Discord channels with recurring subscriptions
+- **Automatic Access Control:** Members get kicked when payments fail - no manual management needed
+- **Base Blockchain Payments:** Accept USDC on Base with minimal gas fees and instant settlements
+
+---
+
+## Real-World Usage Examples
+
+### **Selling a Digital Course**
+
+> I have a video course on web development. I upload the course details, set my Base wallet address, price it at $49 USDC, and share the payment link. Buyers pay with crypto and instantly get access to the course URL.
+
+---
+
+### **Monetizing a Discord Community**
+
+> I run a trading signals Discord server. I connect my Discord account, select my private channels, set a $29/month recurring subscription, and add the Monetize bot. Members pay monthly in USDC, and if they miss 3 payments, they're automatically removed from the channels.
+
+---
+
+### **Creating a Premium Newsletter**
+
+> I write a weekly newsletter with exclusive content. I create a product listing with my Substack URL, set the price at $10 USDC, and share the payment link with my audience. Subscribers pay once and get permanent access.
+
+---
+
+## Quick Start
 
 \`\`\`bash
-git clone <your-repo-url>
+git clone https://github.com/yourusername/monetize
 cd monetize
 npm install
+npm run dev
 \`\`\`
 
-### 2. Set Up Supabase
-
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to Project Settings > API to get your credentials
-3. Run the SQL scripts in the Supabase SQL Editor:
-   - `scripts/001-create-products-table.sql`
-   - `scripts/002-create-payments-table.sql`
-
-### 3. Configure Environment Variables
-
-Create a `.env.local` file in the root directory:
+Set up your `.env.local` file:
 
 \`\`\`env
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Optional: For development email redirects
-NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=http://localhost:3000/marketplace
+# Discord (for community monetization)
+DISCORD_CLIENT_ID=your_discord_client_id
+DISCORD_CLIENT_SECRET=your_discord_client_secret
+DISCORD_BOT_TOKEN=your_discord_bot_token
+NEXT_PUBLIC_DISCORD_REDIRECT_URI=http://localhost:3000/api/discord/callback
 
-# App URL
+# App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 \`\`\`
 
-### 4. Enable Email Authentication in Supabase
+---
 
-1. Go to Authentication > Providers in your Supabase dashboard
-2. Enable Email provider
-3. Configure email templates (optional)
+## How Monetize Powers Your Business (Core Features)
 
-### 5. Run the Development Server
+- **Supabase Authentication:** Secure email/password auth with Row Level Security
+- **Base Blockchain Payments:** Accept USDC on Base L2 with minimal fees
+- **One-Time & Recurring Payments:** Support both product sales and subscriptions
+- **Discord Integration:** OAuth connection, bot management, and automatic role assignment
+- **Payment Link Generation:** Shareable links for each product
+- **Automatic Access Management:** Discord members removed when subscriptions fail
 
-\`\`\`bash
-npm run dev
+---
+
+## Tech Stack
+
+- **@base-org/account** – Base blockchain payment integration
+- **TypeScript** – Strongly typed language for scalable code
+- **Next.js 16** – React framework with App Router
+- **Supabase** – PostgreSQL database with authentication and RLS
+- **Tailwind CSS v4** – Utility-first styling
+- **Discord.js** – Discord bot and OAuth integration
+- **Radix UI + shadcn/ui** – Accessible component library
+
+---
+
+## Use Cases (for any creator scenario)
+
+- Sell digital products (courses, ebooks, templates, software)
+- Monetize Discord communities with recurring subscriptions
+- Create exclusive content access with crypto payments
+- Build membership sites with automatic access control
+- Accept international payments without payment processors
+- Reduce payment fees with Base L2 blockchain
+
+---
+
+## Database Setup
+
+Run these SQL scripts in your Supabase SQL Editor:
+
+### 1. Products Table
+\`\`\`sql
+-- See scripts/001-create-products-table.sql
 \`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-## Project Structure
-
-\`\`\`
-monetize/
-├── app/
-│   ├── api/
-│   │   ├── products/route.ts    # Product CRUD operations
-│   │   └── payments/route.ts    # Payment tracking
-│   ├── auth/
-│   │   ├── signin/page.tsx      # Sign in page
-│   │   └── signup/page.tsx      # Sign up page
-│   ├── create/page.tsx          # Create product page (protected)
-│   ├── marketplace/page.tsx     # Browse products
-│   ├── product/[id]/page.tsx    # Product detail & purchase
-│   └── page.tsx                 # Landing page
-├── components/
-│   ├── auth/                    # Authentication components
-│   ├── ui/                      # shadcn/ui components
-│   ├── base-pay-button.tsx      # Base payment integration
-│   ├── create-product-form.tsx  # Product creation form
-│   └── header.tsx               # Navigation header
-├── lib/
-│   ├── supabase/
-│   │   ├── client.ts            # Browser Supabase client
-│   │   └── server.ts            # Server Supabase client
-│   └── base-pay.ts              # Base payment utilities
-├── scripts/
-│   ├── 001-create-products-table.sql
-│   └── 002-create-payments-table.sql
-└── middleware.ts                # Auth token refresh
+### 2. Payments Table
+\`\`\`sql
+-- See scripts/002-create-payments-table.sql
 \`\`\`
 
-## Database Schema
+### 3. Discord Integration
+\`\`\`sql
+-- See scripts/003-add-discord-support.sql
+\`\`\`
 
-### Products Table
-- `id` - UUID primary key
-- `user_id` - References auth.users (creator)
-- `title` - Product name
-- `description` - Product description
-- `product_url` - URL to digital product
-- `payment_address` - Base wallet address for payments
-- `price_usdc` - Price in USDC
-- `creator_name` - Creator display name
-- `creator_email` - Creator email
+---
 
-### Payments Table
-- `id` - UUID primary key
-- `product_id` - References products
-- `transaction_hash` - Blockchain transaction hash
-- `buyer_address` - Buyer's wallet address
-- `amount_usdc` - Payment amount
-- `status` - Payment status
-- `buyer_email` - Buyer email (optional)
+## Discord Bot Setup
+
+### 1. Create Discord Application
+
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click "New Application" and name it "Monetize Bot"
+3. Go to "OAuth2" and add redirect URL: `http://localhost:3000/api/discord/callback`
+4. Copy your Client ID and Client Secret
+
+### 2. Create Discord Bot
+
+1. Go to "Bot" section in your Discord application
+2. Click "Add Bot"
+3. Enable these Privileged Gateway Intents:
+   - Server Members Intent
+   - Message Content Intent
+4. Copy your Bot Token
+5. Go to "OAuth2 > URL Generator"
+6. Select scopes: `bot`, `applications.commands`
+7. Select permissions: `Manage Roles`, `Kick Members`, `View Channels`
+8. Copy the generated URL and invite the bot to your server
+
+### 3. Configure Environment Variables
+
+Add the Discord credentials to your `.env.local` file.
+
+---
 
 ## Deployment
 
@@ -129,34 +162,53 @@ monetize/
 
 1. Push your code to GitHub
 2. Import the project in Vercel
-3. Add environment variables in Vercel project settings
+3. Add all environment variables
 4. Deploy!
 
-### Environment Variables for Production
+### Production Environment Variables
 
-Make sure to add these in your Vercel project settings:
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `NEXT_PUBLIC_APP_URL` (your production URL)
+\`\`\`env
+NEXT_PUBLIC_SUPABASE_URL=your_production_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_production_anon_key
+DISCORD_CLIENT_ID=your_discord_client_id
+DISCORD_CLIENT_SECRET=your_discord_client_secret
+DISCORD_BOT_TOKEN=your_discord_bot_token
+NEXT_PUBLIC_DISCORD_REDIRECT_URI=https://yourdomain.com/api/discord/callback
+NEXT_PUBLIC_APP_URL=https://yourdomain.com
+\`\`\`
+
+---
 
 ## How It Works
 
-1. **Sign Up**: Users create an account with email/password
-2. **Create Product**: Authenticated users can create product listings with:
-   - Product details (title, description, URL)
-   - Base wallet address for receiving payments
-   - Price in USDC
-3. **Generate Payment Link**: Each product gets a unique payment link
-4. **Accept Payments**: Buyers pay with USDC on Base using their wallet
-5. **Instant Access**: After payment confirmation, buyers get access to the product URL
+### Digital Product Sales
+1. Creator signs up and creates a product listing
+2. Sets Base wallet address and price in USDC
+3. Shares payment link with audience
+4. Buyers pay with USDC on Base
+5. Instant access to product URL after payment
+
+### Discord Community Monetization
+1. Creator connects Discord account via OAuth
+2. Selects Discord server and channels to monetize
+3. Sets recurring subscription price (monthly)
+4. Adds Monetize bot to Discord server
+5. Members subscribe with USDC payments
+6. Bot assigns roles and manages access
+7. Failed payments trigger automatic removal after 3 attempts
+
+---
 
 ## Security
 
-- Row Level Security (RLS) enabled on all tables
-- Users can only modify their own products
-- Authentication required for product creation
-- Middleware refreshes auth tokens automatically
-- Payment verification via blockchain transaction hash
+- ✅ Row Level Security (RLS) on all database tables
+- ✅ Users can only modify their own products
+- ✅ Authentication required for product creation
+- ✅ Middleware refreshes auth tokens automatically
+- ✅ Payment verification via blockchain transaction hash
+- ✅ Discord bot permissions scoped to role management only
+
+---
 
 ## License
 
