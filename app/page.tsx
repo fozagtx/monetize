@@ -1,95 +1,81 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Coins, Shield, Zap } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="container mx-auto px-4 py-24 md:py-32">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary">
-              <Coins className="h-4 w-4" />
-              Powered by Base
-            </div>
-            <h1 className="mb-6 text-balance text-5xl font-bold tracking-tight md:text-7xl">
-              Monetize your Value
-            </h1>
-            <p className="mb-8 text-pretty text-lg text-muted-foreground md:text-xl">
-              Turn you skills , and value into business with a simple link
-            </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button asChild size="lg" className="gap-2">
-                <Link href="/create">
-                  Create Product <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/marketplace">Browse Marketplace</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#030712] text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-32 top-16 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.28),transparent_65%)] blur-3xl" />
+        <div className="absolute right-[-18%] top-1/4 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.28),transparent_70%)] blur-[140px]" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#030712] via-[#030712]/60 to-transparent" />
+      </div>
 
-      {/* Features Section */}
-      <section className="border-b border-border py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-12 md:grid-cols-3">
-            <div className="flex flex-col items-start">
-              <div className="mb-4 rounded-lg bg-primary/10 p-3">
-                <Zap className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Instant Payments</h3>
-              <p className="text-muted-foreground">
-                Payments settle in seconds on Base. No waiting days for bank
-                transfers or payment processors.
-              </p>
-            </div>
-            <div className="flex flex-col items-start">
-              <div className="mb-4 rounded-lg bg-primary/10 p-3">
-                <Shield className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">No Chargebacks</h3>
-              <p className="text-muted-foreground">
-                Crypto payments are final. No risk of fraudulent chargebacks
-                eating into your revenue.
-              </p>
-            </div>
-            <div className="flex flex-col items-start">
-              <div className="mb-4 rounded-lg bg-primary/10 p-3">
-                <Coins className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Zero Platform Fees</h3>
-              <p className="text-muted-foreground">
-                Keep 100% of your earnings. Only pay minimal gas fees on Base
-                (pennies per transaction).
-              </p>
-            </div>
+      <header className="relative z-10 mx-auto w-full max-w-6xl px-6 py-8 md:px-8">
+        <nav className="relative flex items-center justify-between text-sm font-medium">
+          <Link href="/" className="flex items-center gap-3 text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-semibold tracking-tight">
+              ●
+            </span>
+            <span className="sr-only">Back to home</span>
+          </Link>
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 text-sm font-medium text-white/60 md:flex">
+            <Link href="#features" className="transition-colors hover:text-white">
+              Features
+            </Link>
+            <Link href="#docs" className="transition-colors hover:text-white">
+              Docs
+            </Link>
+            <Link href="#company" className="transition-colors hover:text-white">
+              Company
+            </Link>
           </div>
-        </div>
-      </section>
+          <Link
+            href="/auth/signin"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+          >
+            Log In
+          </Link>
+        </nav>
+      </header>
 
-      {/* CTA Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 text-center md:p-12">
-            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
-              Ready to start earning?
-            </h2>
-            <p className="mb-8 text-pretty text-lg text-muted-foreground">
-              Create your first product listing in under a minute. No signup
-              required.
-            </p>
-            <Button asChild size="lg" className="gap-2">
-              <Link href="/create">
-                Get Started <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+      <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-24 pt-10 text-center md:px-8">
+        <p className="mb-6 text-sm uppercase tracking-[0.4em] text-white/50">
+          Built for Developers
+        </p>
+        <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl">
+          Monetize your software
+        </h1>
+        <p className="mt-6 max-w-2xl text-pretty text-lg text-white/60 sm:text-xl">
+          Turn your software into a business with 6 lines of code. Confident infrastructure, instant payments, and tooling that lets you ship without friction.
+        </p>
+        <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
+          <Button
+            asChild
+            size="lg"
+            className="group h-12 rounded-full bg-white px-8 text-base font-semibold text-[#030712] shadow-[0_25px_50px_-25px_rgba(255,255,255,0.85)] transition hover:bg-white/90"
+          >
+            <Link href="/create">
+              Get Started
+              <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="h-12 rounded-full border-white/15 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/10"
+          >
+            <Link href="#why">Why Base Monetize</Link>
+          </Button>
         </div>
-      </section>
+      </main>
+
+      <div id="features" className="sr-only" aria-hidden="true" />
+      <div id="docs" className="sr-only" aria-hidden="true" />
+      <div id="company" className="sr-only" aria-hidden="true" />
+      <div id="why" className="sr-only" aria-hidden="true" />
     </div>
   );
 }
