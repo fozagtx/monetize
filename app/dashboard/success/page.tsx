@@ -5,7 +5,6 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 import { CheckCircle2, Copy, ExternalLink, Share2 } from "lucide-react"
 
 function SuccessContent() {
@@ -59,7 +58,6 @@ function SuccessContent() {
   return (
     <div className="flex flex-col">
       <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-        <SidebarTrigger className="-ml-1" />
         <h1 className="text-xl font-semibold">Product Created</h1>
       </header>
 
