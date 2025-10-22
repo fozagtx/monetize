@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ConditionalHeader } from "@/components/conditional-header"
-import { Header } from "@/components/header"
-=======
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
->>>>>>> 5d6d1f2 (readme update)
+// import { ConditionalHeader } from "@/components/conditional-header"
+// import { Header } from "@/components/header"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,14 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-<<<<<<< HEAD
       <body className={inter.className}>
-        <ConditionalHeader header={<Header />} />
+        {/*<ConditionalHeader header={<Header />} />*/}
         {children}
       </body>
-=======
-      <body className={inter.className}>{children}</body>
->>>>>>> 5d6d1f2 (readme update)
     </html>
   );
 }
