@@ -20,7 +20,7 @@ function SuccessContent() {
 
   useEffect(() => {
     if (!productId) {
-      router.push("/create")
+      router.push("/dashboard/create")
     }
   }, [productId, router])
 
@@ -163,10 +163,10 @@ function SuccessContent() {
             </div>
 
             <div className="mt-6 flex gap-2">
-              <Button onClick={() => router.push("/create")} variant="outline" className="flex-1">
+              <Button onClick={() => router.push("/dashboard/create")} variant="outline" className="flex-1">
                 Create Another Product
               </Button>
-              <Button onClick={() => router.push("/")} className="flex-1">
+              <Button onClick={() => router.push("/dashboard")} className="flex-1">
                 Go to Dashboard
               </Button>
             </div>
