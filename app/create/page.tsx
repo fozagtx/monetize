@@ -1,4 +1,3 @@
-import { CreateProductForm } from "@/components/create-product-form"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
@@ -12,17 +11,5 @@ export default async function CreatePage() {
     redirect("/auth/signin")
   }
 
-  return (
-    <div className="min-h-screen bg-background py-12">
-      <div className="container mx-auto max-w-2xl px-4">
-        <div className="mb-8 text-center">
-          <h1 className="mb-3 text-4xl font-bold">Create Your Product</h1>
-          <p className="text-lg text-muted-foreground">
-            Add your product details and get a shareable payment link to accept USDC on Base
-          </p>
-        </div>
-        <CreateProductForm />
-      </div>
-    </div>
-  )
+  redirect("/dashboard/create")
 }

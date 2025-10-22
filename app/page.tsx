@@ -2,8 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await getSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#030712] text-white">
       <div className="pointer-events-none absolute inset-0">
@@ -56,7 +61,7 @@ export default function HomePage() {
             size="lg"
             className="group h-12 rounded-full bg-white px-8 text-base font-semibold text-[#030712] shadow-[0_25px_50px_-25px_rgba(255,255,255,0.85)] transition hover:bg-white/90"
           >
-            <Link href="/create">
+            <Link href={user ? "/dashboard" : "/auth/signup"}>
               Get Started
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
             </Link>

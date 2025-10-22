@@ -20,13 +20,13 @@ export async function Header() {
           Monetize
         </Link>
         <nav className="flex items-center gap-2">
-          <Button asChild variant="ghost">
-            <Link href="/marketplace">Marketplace</Link>
-          </Button>
           {user ? (
             <>
+              <Button asChild variant="ghost">
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
               <Button asChild>
-                <Link href="/create">Create Product</Link>
+                <Link href="/dashboard/create">Create Product</Link>
               </Button>
               <SignOutButton />
             </>

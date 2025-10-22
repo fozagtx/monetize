@@ -44,7 +44,7 @@ export function CreateProductForm() {
       }
 
       const { productId } = await response.json()
-      router.push(`/create/success?id=${productId}`)
+      router.push(`/dashboard/success?id=${productId}`)
     } catch (error) {
       console.error("[v0] Error creating product:", error)
       alert("Failed to create product. Please try again.")
