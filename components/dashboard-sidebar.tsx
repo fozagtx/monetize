@@ -74,17 +74,20 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Coins className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Monetize</span>
-                  <span className="truncate text-xs text-muted-foreground">Creator Platform</span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
+            <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+              <SidebarTrigger className="shrink-0" />
+              <SidebarMenuButton size="lg" asChild className="flex-1 group-data-[collapsible=icon]:hidden">
+                <Link href="/">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    <Coins className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">Monetize</span>
+                    <span className="truncate text-xs text-muted-foreground">Creator Platform</span>
+                  </div>
+                </Link>
+              </SidebarMenuButton>
+            </div>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>

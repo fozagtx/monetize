@@ -1,6 +1,5 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Mail, Calendar } from "lucide-react"
 
@@ -20,7 +19,6 @@ export default async function ProfilePage() {
   return (
     <div className="flex flex-col">
       <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-        <SidebarTrigger className="-ml-1" />
         <div className="flex flex-1 items-center justify-between">
           <h1 className="text-xl font-semibold">Profile</h1>
         </div>

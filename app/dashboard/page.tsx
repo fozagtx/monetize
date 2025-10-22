@@ -1,7 +1,6 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Package, DollarSign, TrendingUp, Plus } from "lucide-react"
 import Link from "next/link"
 
@@ -33,7 +32,6 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col">
       <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-        <SidebarTrigger className="-ml-1" />
         <h1 className="text-xl font-semibold">Dashboard</h1>
       </header>
 

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,19 @@ export function SignInForm() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const supabase = getSupabaseBrowserClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session) {
+        router.push("/dashboard")
+      }
+    }
+    
+    checkSession()
+  }, [router])
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,7 +46,7 @@ export function SignInForm() {
       setError(error.message)
       setLoading(false)
     } else {
-      router.push("/marketplace")
+      router.push("/dashboard")
       router.refresh()
     }
   }
