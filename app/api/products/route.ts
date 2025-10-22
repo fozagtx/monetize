@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 
+export const dynamic = "force-dynamic"
+
 export async function POST(request: Request) {
   try {
     const supabase = await getSupabaseServerClient()
@@ -22,6 +24,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
+    // Parse price to number to ensure proper type
+    const priceNumber = typeof priceUsdc === "string" ? parseFloat(priceUsdc) : priceUsdc
+
+    if (isNaN(priceNumber) || priceNumber <= 0) {
+      return NextResponse.json({ error: "Invalid price" }, { status: 400 })
+    }
+
     const { data, error } = await supabase
       .from("products")
       .insert({
@@ -30,7 +39,7 @@ export async function POST(request: Request) {
         description,
         product_url: productUrl,
         payment_address: paymentAddress,
-        price_usdc: priceUsdc,
+        price_usdc: priceNumber,
         creator_name: creatorName || user.email,
         creator_email: creatorEmail || user.email,
       })
@@ -39,13 +48,17 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("[v0] Error creating product:", error)
-      return NextResponse.json({ error: "Failed to create product" }, { status: 500 })
+      return NextResponse.json(
+        { error: "Failed to create product", details: error.message },
+        { status: 500 },
+      )
     }
 
     return NextResponse.json({ productId: data.id })
   } catch (error) {
     console.error("[v0] Error creating product:", error)
-    return NextResponse.json({ error: "Failed to create product" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Unknown error"
+    return NextResponse.json({ error: "Failed to create product", details: message }, { status: 500 })
   }
 }
 
