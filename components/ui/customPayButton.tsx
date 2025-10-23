@@ -14,7 +14,11 @@ export function CustomPayButton({
 }) {
   const handlePayment = async () => {
     try {
-      const payment = await pay({ amount: amount.toFixed(2), to });
+      const payment = await pay({
+        testnet: true,
+        amount: amount.toFixed(2),
+        to,
+      });
       console.log(`Payment sent! Transaction ID: ${payment.id}`);
       alert(`Payment successful! Transaction ID: ${payment.id}`);
       window.open(productUrl, "_blank");
