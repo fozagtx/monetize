@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Package, DollarSign, TrendingUp, Plus } from "lucide-react";
 import Link from "next/link";
+import { EmptyState } from "@/components/empty-state";
 
 export default async function DashboardPage() {
   const supabase = await getSupabaseServerClient();
@@ -53,7 +54,7 @@ export default async function DashboardPage() {
 
       <div className="flex-1 space-y-6 p-6">
         <div className="grid gap-4 md:grid-cols-3">
-          <Card className="bg-white border border-gray-100 rounded-xl shadow-sm p-4 hover:shadow-md transition">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Total Products
@@ -69,7 +70,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border border-gray-100 rounded-xl shadow-sm p-4 hover:shadow-md transition">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Sales</CardTitle>
 
@@ -85,7 +86,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border border-gray-100 rounded-xl shadow-sm p-4 hover:shadow-md transition">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Total Revenue
@@ -104,7 +105,7 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        <Card className="bg-white border border-gray-100 rounded-xl shadow-sm p-4 hover:shadow-md transition">
+        <Card>
           <CardHeader>
             <CardTitle>Recent Products</CardTitle>
 
@@ -143,22 +144,12 @@ export default async function DashboardPage() {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <Package className="mb-4 h-12 w-12 text-muted-foreground" />
-
-                <h3 className="mb-2 text-lg font-semibold">No products yet</h3>
-
-                <p className="mb-4 text-sm text-muted-foreground">
-                  Create your first product to start accepting payments
-                </p>
-
-                <Button asChild>
-                  <Link href="/dashboard/create">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Create Product
-                  </Link>
-                </Button>
-              </div>
+              <EmptyState
+                title="No products yet"
+                description="Create your first product to start accepting payments"
+                buttonText="Create Product"
+                buttonLink="/dashboard/create"
+              />
             )}
           </CardContent>
         </Card>

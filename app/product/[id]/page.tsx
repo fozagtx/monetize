@@ -9,10 +9,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { CopyLinkButton } from "@/components/copy-link-button";
-import { CheckCircle2, ExternalLink } from "lucide-react";
+import { CheckCircle2, ExternalLink, Trash2 } from "lucide-react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { ProductPayButton } from "@/components/basePay";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ProductDeleteButton } from "@/components/product-delete-button";
 
 async function getProduct(id: string) {
   try {
@@ -105,31 +107,33 @@ export default async function ProductPage(props: {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-16">
+    <div className="min-h-screen bg-background py-16">
       <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
-            <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                  <h1 className="text-4xl font-bold tracking-tight mb-2">
-                    {product.title}
-                  </h1>
-                  {product.creator_name && (
-                    <p className="text-sm text-muted-foreground">
-                      by{" "}
-                      <span className="font-medium">
-                        {product.creator_name}
-                      </span>
-                    </p>
-                  )}
-                </div>
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="text-4xl font-bold tracking-tight mb-2">
+                      {product.title}
+                    </h1>
+                    {product.creator_name && (
+                      <p className="text-sm text-muted-foreground">
+                        by{" "}
+                        <span className="font-medium">
+                          {product.creator_name}
+                        </span>
+                      </p>
+                    )}
+                  </div>
 
-                <Badge variant="outline" className="text-base px-3 py-1">
-                  ${product.price_usdc} USDC
-                </Badge>
-              </div>
-            </div>
+                  <Badge variant="outline" className="text-base px-3 py-1">
+                    ${product.price_usdc} USDC
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
 
             <Separator />
 
@@ -162,9 +166,9 @@ export default async function ProductPage(props: {
           </div>
 
           <div className="sticky top-20">
-            <Card className="shadow-xl border-border/60 bg-card/95 backdrop-blur-md">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-semibold">
+                <CardTitle>
                   {isCreator ? "Your Product" : "Complete Your Purchase"}
                 </CardTitle>
                 <CardDescription>
@@ -183,7 +187,10 @@ export default async function ProductPage(props: {
                         {paymentLink}
                       </p>
                     </div>
-                    <CopyLinkButton url={paymentLink} />
+                    <div className="flex gap-2">
+                      <CopyLinkButton url={paymentLink} />
+                      <ProductDeleteButton productId={product.id} />
+                    </div>
                   </>
                 ) : (
                   <>
