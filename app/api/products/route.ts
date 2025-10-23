@@ -105,7 +105,7 @@ export async function GET(request: Request) {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("[v0] Error fetching products:", error);
+      console.error("Error fetching products:", error);
       return NextResponse.json(
         { error: "Failed to fetch products" },
         { status: 500 },

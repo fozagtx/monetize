@@ -16,7 +16,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 async function getProduct(id: string) {
   try {
-    const response = await fetch(`/api/products?id=${id}`, {
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_APP_URL
+        : "http://localhost:3000";
+    const response = await fetch(`${baseUrl}/api/products?id=${id}`, {
       cache: "no-store",
       next: { revalidate: 0 },
     });

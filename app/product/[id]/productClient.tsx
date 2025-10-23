@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardContent,
@@ -26,12 +24,14 @@ export default function ProductClient({
 
   if (loading) return <ProductSkeleton />;
   if (error || !product)
-    return <p className="text-center mt-20">Product not found.</p>;
+    return (
+      <p className="text-center mt-20 text-muted-foreground">
+        Product not found.
+      </p>
+    );
 
   const isCreator = currentUserId === product.user_id;
-
-  const baseUrl = "https://monetize-sh.vercel.app";
-  const paymentLink = `${baseUrl}/product/${id}`;
+  const paymentLink = `/product/${id}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-16">
@@ -48,7 +48,7 @@ export default function ProductClient({
                   {product.creator_name && (
                     <p className="text-sm text-muted-foreground">
                       by{" "}
-                      <span className="font-medium">
+                      <span className="font-medium text-foreground">
                         {product.creator_name}
                       </span>
                     </p>
@@ -110,6 +110,7 @@ export default function ProductClient({
                     <div className="rounded-lg border border-border bg-muted/40 p-4">
                       <p className="mb-2 text-sm font-medium">Payment Link</p>
                       <p className="break-all font-mono text-sm text-muted-foreground">
+                        {window?.location?.origin || ""}
                         {paymentLink}
                       </p>
                     </div>
