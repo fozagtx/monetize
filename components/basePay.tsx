@@ -1,7 +1,4 @@
-"use client";
-
-import { BasePayButton } from "@base-org/account-ui/react";
-import { pay } from "@base-org/account";
+import { CustomPayButton } from "@/components/ui/customPayButton";
 
 export function ProductPayButton({
   amount,
@@ -12,17 +9,5 @@ export function ProductPayButton({
   to: string;
   productUrl: string;
 }) {
-  const handlePayment = async () => {
-    try {
-      const payment = await pay({ amount: amount.toFixed(2), to });
-      console.log(`Payment sent! Transaction ID: ${payment.id}`);
-      alert(`Payment successful! Transaction ID: ${payment.id}`);
-      window.open(productUrl, "_blank");
-    } catch (error: any) {
-      console.error(`Payment failed: ${error.message}`);
-      alert(`Payment failed: ${error.message}`);
-    }
-  };
-
-  return <BasePayButton colorScheme="light" onClick={handlePayment} />;
+  return <CustomPayButton amount={amount} to={to} productUrl={productUrl} />;
 }

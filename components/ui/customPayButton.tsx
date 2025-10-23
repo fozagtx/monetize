@@ -1,0 +1,28 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { pay } from "@base-org/account";
+
+export function CustomPayButton({
+  amount,
+  to,
+  productUrl,
+}: {
+  amount: number;
+  to: string;
+  productUrl: string;
+}) {
+  const handlePayment = async () => {
+    try {
+      const payment = await pay({ amount: amount.toFixed(2), to });
+      console.log(`Payment sent! Transaction ID: ${payment.id}`);
+      alert(`Payment successful! Transaction ID: ${payment.id}`);
+      window.open(productUrl, "_blank");
+    } catch (error: any) {
+      console.error(`Payment failed: ${error.message}`);
+      alert(`Payment failed: ${error.message}`);
+    }
+  };
+
+  return <Button onClick={handlePayment}>Pay with Base</Button>;
+}

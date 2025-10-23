@@ -61,10 +61,14 @@ export function SignInForm() {
   };
 
   return (
-    <Card>
+    <Card className="bg-white rounded-2xl shadow-sm border border-gray-100 backdrop-blur-md p-8 space-y-4">
       <CardHeader>
-        <CardTitle></CardTitle>
-        <CardDescription></CardDescription>
+        <CardTitle className="text-xl font-semibold text-gray-900">
+          Sign In
+        </CardTitle>
+        <CardDescription className="text-sm text-gray-500">
+          Enter your credentials to access your account
+        </CardDescription>
       </CardHeader>
       <form onSubmit={handleSignIn}>
         <CardContent className="space-y-4">

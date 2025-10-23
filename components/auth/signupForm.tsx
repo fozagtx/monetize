@@ -68,10 +68,12 @@ export function SignUpForm() {
 
   if (success) {
     return (
-      <Card>
+      <Card className="bg-white rounded-2xl shadow-sm border border-gray-100 backdrop-blur-md p-8 space-y-4">
         <CardHeader>
-          <CardTitle>Check your email</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl font-semibold text-gray-900">
+            Check your email
+          </CardTitle>
+          <CardDescription className="text-sm text-gray-500">
             We sent you a confirmation link. Please check your email to complete
             the signup process.
           </CardDescription>
@@ -86,10 +88,14 @@ export function SignUpForm() {
   }
 
   return (
-    <Card>
+    <Card className="bg-white rounded-2xl shadow-sm border border-gray-100 backdrop-blur-md p-8 space-y-4">
       <CardHeader>
-        <CardTitle>Sign Up</CardTitle>
-        <CardDescription>Create a new account to start selling</CardDescription>
+        <CardTitle className="text-xl font-semibold text-gray-900">
+          Sign Up
+        </CardTitle>
+        <CardDescription className="text-sm text-gray-500">
+          Create a new account to start selling
+        </CardDescription>
       </CardHeader>
       <form onSubmit={handleSignUp}>
         <CardContent className="space-y-4">

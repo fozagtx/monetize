@@ -105,11 +105,11 @@ export default async function ProductPage(props: {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-16">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-16">
       <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+            <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h1 className="text-4xl font-bold tracking-tight mb-2">
