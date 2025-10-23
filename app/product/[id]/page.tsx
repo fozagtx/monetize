@@ -16,11 +16,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 async function getProduct(id: string) {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_APP_URL || "https://monetize-sh.vercel.app";
-
-    const response = await fetch(`${baseUrl}/api/products?id=${id}`, {
+    const response = await fetch(`/api/products?id=${id}`, {
       cache: "no-store",
+      next: { revalidate: 0 },
     });
 
     if (!response.ok) return null;
