@@ -24,5 +24,9 @@ export function CustomPayButton({
     }
   };
 
-  return <Button onClick={handlePayment}>Pay with Base</Button>;
+  return (
+    <Button onClick={handlePayment} variant="secondary">
+      Pay with Base
+    </Button>
+  );
 }
