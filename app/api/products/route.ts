@@ -75,6 +75,64 @@ export async function POST(request: Request) {
   }
 }
 
+export async function DELETE(request: Request) {
+  try {
+    const supabase = await getSupabaseServerClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "Product ID missing" }, { status: 400 });
+    }
+
+    // First, verify the user owns the product
+    const { data: product, error: fetchError } = await supabase
+      .from("products")
+      .select("user_id")
+      .eq("id", id)
+      .single();
+
+    if (fetchError) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    if (product.user_id !== user.id) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    // Proceed with deletion
+    const { error: deleteError } = await supabase
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+    if (deleteError) {
+      console.error("Error deleting product:", deleteError);
+      return NextResponse.json(
+        { error: "Failed to delete product" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return NextResponse.json(
+      { error: "Failed to delete product" },
+      { status: 500 },
+    );
+  }
+}
+
 export async function GET(request: Request) {
   try {
     const supabase = await getSupabaseServerClient();
