@@ -1,34 +1,44 @@
-import { NextResponse } from "next/server"
-import { getSupabaseServerClient } from "@/lib/supabase/server"
+import { NextResponse } from "next/server";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
-    const supabase = await getSupabaseServerClient()
+    const supabase = await getSupabaseServerClient();
 
     const {
       data: { user },
       error: authError,
-    } = await supabase.auth.getUser()
+    } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json()
-    const { title, description, productUrl, paymentAddress, priceUsdc, creatorName, creatorEmail } = body
+    const body = await request.json();
+    const {
+      title,
+      description,
+      productUrl,
+      paymentAddress,
+      priceUsdc,
+      creatorName,
+      creatorEmail,
+    } = body;
 
-    // Validate required fields
     if (!title || !productUrl || !paymentAddress || !priceUsdc) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
     }
 
-    // Parse price to number to ensure proper type
-    const priceNumber = typeof priceUsdc === "string" ? parseFloat(priceUsdc) : priceUsdc
+    const priceNumber =
+      typeof priceUsdc === "string" ? parseFloat(priceUsdc) : priceUsdc;
 
     if (isNaN(priceNumber) || priceNumber <= 0) {
-      return NextResponse.json({ error: "Invalid price" }, { status: 400 })
+      return NextResponse.json({ error: "Invalid price" }, { status: 400 });
     }
 
     const { data, error } = await supabase
@@ -44,58 +54,70 @@ export async function POST(request: Request) {
         creator_email: creatorEmail || user.email,
       })
       .select("id")
-      .single()
+      .single();
 
     if (error) {
-      console.error("[v0] Error creating product:", error)
+      console.error(" Error creating product:", error);
       return NextResponse.json(
         { error: "Failed to create product", details: error.message },
         { status: 500 },
-      )
+      );
     }
 
-    return NextResponse.json({ productId: data.id })
+    return NextResponse.json({ productId: data.id });
   } catch (error) {
-    console.error("[v0] Error creating product:", error)
-    const message = error instanceof Error ? error.message : "Unknown error"
-    return NextResponse.json({ error: "Failed to create product", details: message }, { status: 500 })
+    console.error(" Error creating product:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json(
+      { error: "Failed to create product", details: message },
+      { status: 500 },
+    );
   }
 }
 
 export async function GET(request: Request) {
   try {
-    const supabase = await getSupabaseServerClient()
-    const { searchParams } = new URL(request.url)
-    const id = searchParams.get("id")
+    const supabase = await getSupabaseServerClient();
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
 
     if (id) {
       const { data: product, error } = await supabase
         .from("products")
         .select("*")
         .eq("id", id)
-        .single()
+        .single();
 
       if (error) {
-        console.error("[v0] Error fetching product:", error)
-        return NextResponse.json({ error: "Product not found" }, { status: 404 })
+        console.error(" Error fetching product:", error);
+        return NextResponse.json(
+          { error: "Product not found" },
+          { status: 404 },
+        );
       }
 
-      return NextResponse.json(product)
+      return NextResponse.json(product);
     }
 
     const { data: products, error } = await supabase
       .from("products")
       .select("id, title, description, price_usdc, creator_name, created_at")
-      .order("created_at", { ascending: false })
+      .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("[v0] Error fetching products:", error)
-      return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })
+      console.error("[v0] Error fetching products:", error);
+      return NextResponse.json(
+        { error: "Failed to fetch products" },
+        { status: 500 },
+      );
     }
 
-    return NextResponse.json({ products })
+    return NextResponse.json({ products });
   } catch (error) {
-    console.error("[v0] Error fetching products:", error)
-    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })
+    console.error("Error fetching products:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch products" },
+      { status: 500 },
+    );
   }
 }
