@@ -78,13 +78,17 @@ function ProductSkeleton() {
   );
 }
 
-export default async function ProductPage(props: {
-  params: Promise<{ id: string }>;
+export default async function ProductPage({
+  params,
+}: {
+  params: { id: string };
 }) {
-  const { id } = await props.params;
+  const { id } = params;
 
   const product = await getProduct(id);
-  if (!product) notFound();
+  if (!product) {
+    notFound();
+  }
 
   const supabase = await getSupabaseServerClient();
   const {

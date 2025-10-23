@@ -75,12 +75,12 @@ export async function GET(request: Request) {
         .eq("id", id)
         .single()
 
-      if (error) {
-        console.error("[v0] Error fetching product:", error)
-        return NextResponse.json({ error: "Product not found" }, { status: 404 })
+      if (error || !product) {
+        console.error("[v0] Error fetching product:", error);
+        return NextResponse.json({ error: "Product not found" }, { status: 404 });
       }
 
-      return NextResponse.json(product)
+      return NextResponse.json(product);
     }
 
     const { data: products, error } = await supabase

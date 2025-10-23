@@ -18,31 +18,6 @@ export default async function HomePage() {
       </div>
 
       <header className="relative z-10 mx-auto w-full max-w-6xl px-6 py-8 md:px-8">
-        <nav className="relative flex items-center justify-between text-sm font-medium">
-          <Link href="/" className="flex items-center gap-3 text-white">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-semibold tracking-tight">
-              ●
-            </span>
-            <span className="sr-only">Back to home</span>
-          </Link>
-          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 text-sm font-medium text-white/60 md:flex">
-            <Link
-              href="#features"
-              className="transition-colors hover:text-white"
-            >
-              Features
-            </Link>
-            <Link href="#docs" className="transition-colors hover:text-white">
-              Docs
-            </Link>
-          </div>
-          <Link
-            href="/auth/signin"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Log In
-          </Link>
-        </nav>
       </header>
 
       <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-24 pt-10 text-center md:px-8">

@@ -1,9 +1,16 @@
-import { getSupabaseServerClient } from "@/lib/supabase/server"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Plus } from "lucide-react"
-import Link from "next/link"
+import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Plus, Package } from "lucide-react";
+import Link from "next/link";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 
 export default async function ProductsPage() {
   const supabase = await getSupabaseServerClient()
@@ -52,20 +59,23 @@ export default async function ProductsPage() {
             ))}
           </div>
         ) : (
-          <Card>
-            <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-              <h3 className="mb-2 text-lg font-semibold">No products yet</h3>
-              <p className="mb-4 text-sm text-muted-foreground">
+          <Empty>
+            <EmptyMedia>
+              <Package className="h-16 w-16 text-muted-foreground" />
+            </EmptyMedia>
+            <EmptyContent>
+              <EmptyTitle>No products yet</EmptyTitle>
+              <EmptyDescription>
                 Create your first product to start accepting payments
-              </p>
-              <Button asChild>
-                <Link href="/dashboard/create">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Create Product
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+              </EmptyDescription>
+            </EmptyContent>
+            <Button asChild className="mt-6">
+              <Link href="/dashboard/create">
+                <Plus className="mr-2 h-4 w-4" />
+                Create Product
+              </Link>
+            </Button>
+          </Empty>
         )}
       </div>
     </div>
