@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { BasePayButton } from "@base-org/account-ui/react";
 import { pay } from "@base-org/account";
 
 export function CustomPayButton({
@@ -24,5 +24,5 @@ export function CustomPayButton({
     }
   };
 
-  return <Button onClick={handlePayment}>Pay with Base</Button>;
+  return <BasePayButton colorScheme="light" onClick={handlePayment} />;
 }

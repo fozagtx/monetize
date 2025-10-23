@@ -1,14 +1,14 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Coins } from "lucide-react"
-import { getSupabaseServerClient } from "@/lib/supabase/server"
-import { SignOutButton } from "./auth/signout-button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Coins } from "lucide-react";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { SignOutButton } from "./auth/signoutButton";
 
 export async function Header() {
-  const supabase = await getSupabaseServerClient()
+  const supabase = await getSupabaseServerClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,5 +43,5 @@ export async function Header() {
         </nav>
       </div>
     </header>
-  )
+  );
 }

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { CopyLinkButton } from "@/components/copy-link-button";
+import { CopyLinkButton } from "@/components/copyLinkButton";
 import { ProductPayButton } from "@/components/basePay";
 import { CheckCircle2, ExternalLink } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -39,7 +39,7 @@ export default function ProductClient({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left column */}
           <div className="space-y-8">
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+            <div className="rounded-xl bg-card/80 p-6 shadow-sm backdrop-blur-sm">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -92,7 +92,7 @@ export default function ProductClient({
 
           {/* Right column */}
           <div className="sticky top-20">
-            <Card className="shadow-xl border-border/60 bg-card/95 backdrop-blur-md">
+            <Card className="shadow-lg bg-card/90 backdrop-blur-md border-0">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold">
                   {isCreator ? "Your Product" : "Complete Your Purchase"}
@@ -107,7 +107,7 @@ export default function ProductClient({
               <CardContent className="space-y-6">
                 {isCreator ? (
                   <>
-                    <div className="rounded-lg border border-border bg-muted/40 p-4">
+                    <div className="rounded-lg bg-muted/40 p-4">
                       <p className="mb-2 text-sm font-medium">Payment Link</p>
                       <p className="break-all font-mono text-sm text-muted-foreground">
                         {window?.location?.origin || ""}
@@ -153,7 +153,7 @@ function ProductSkeleton() {
       <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
-            <Card className="p-6">
+            <Card className="p-6 bg-card/70 shadow-sm border-0 backdrop-blur-sm">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="space-y-3">
                   <Skeleton className="h-8 w-48" />

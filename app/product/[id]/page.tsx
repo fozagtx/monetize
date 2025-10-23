@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { CopyLinkButton } from "@/components/copy-link-button";
+import { CopyLinkButton } from "@/components/copyLinkButton";
 import { CheckCircle2, ExternalLink } from "lucide-react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { ProductPayButton } from "@/components/basePay";
@@ -41,7 +41,7 @@ function ProductSkeleton() {
       <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
-            <Card className="p-6">
+            <Card className="p-6 bg-white/70 backdrop-blur-md shadow-sm border-0">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="space-y-3">
                   <Skeleton className="h-8 w-48" />
@@ -50,12 +50,10 @@ function ProductSkeleton() {
                 <Skeleton className="h-6 w-24 rounded-full" />
               </div>
             </Card>
-
             <Separator />
             <Skeleton className="h-5 w-40" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-3/4" />
-
             <Separator />
             <Skeleton className="h-5 w-44" />
             <Skeleton className="h-4 w-2/3" />
@@ -63,7 +61,7 @@ function ProductSkeleton() {
           </div>
 
           <div className="sticky top-20">
-            <Card>
+            <Card className="bg-white/70 backdrop-blur-md shadow-md border-0">
               <CardHeader>
                 <Skeleton className="h-6 w-40 mb-2" />
                 <Skeleton className="h-4 w-64" />
@@ -109,7 +107,7 @@ export default async function ProductPage(props: {
       <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
-            <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div className="rounded-xl bg-white/70 backdrop-blur-md p-6 shadow-sm border-0">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -162,7 +160,7 @@ export default async function ProductPage(props: {
           </div>
 
           <div className="sticky top-20">
-            <Card className="shadow-xl border-border/60 bg-card/95 backdrop-blur-md">
+            <Card className="shadow-lg bg-white/80 backdrop-blur-md border-0">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold">
                   {isCreator ? "Your Product" : "Complete Your Purchase"}
@@ -177,7 +175,7 @@ export default async function ProductPage(props: {
               <CardContent className="space-y-6">
                 {isCreator ? (
                   <>
-                    <div className="rounded-lg border border-border bg-muted/40 p-4">
+                    <div className="rounded-lg bg-muted/40 p-4 border-0">
                       <p className="mb-2 text-sm font-medium">Payment Link</p>
                       <p className="break-all font-mono text-sm text-muted-foreground">
                         {paymentLink}
@@ -187,7 +185,7 @@ export default async function ProductPage(props: {
                   </>
                 ) : (
                   <>
-                    <div className="rounded-lg bg-muted/60 p-4 text-sm text-muted-foreground">
+                    <div className="rounded-lg bg-muted/60 p-4 text-sm text-muted-foreground border-0">
                       <p className="mb-1 font-medium text-foreground">
                         After payment:
                       </p>

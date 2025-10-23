@@ -8,7 +8,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -70,7 +69,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     <Sidebar
       variant="floating"
       collapsible="icon"
-      className="bg-gradient-to-b from-white to-gray-50 border-r border-gray-100 backdrop-blur-lg"
+      className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-lg shadow-sm"
     >
       <SidebarHeader>
         <SidebarMenu>
@@ -88,9 +87,6 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">Monetize</span>
-                    <span className="truncate text-xs text-muted-foreground">
-                      Creator Platform
-                    </span>
                   </div>
                 </Link>
               </SidebarMenuButton>
@@ -114,7 +110,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                     }
                     className={cn(
                       pathname.startsWith(item.href) &&
-                        "border-l-2 border-[#93C5FD] bg-[#F9FAFB]",
+                        "bg-[#F9FAFB] text-primary font-medium",
                     )}
                   >
                     <Link href={item.href}>
@@ -154,7 +150,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg shadow-lg"
                 side="bottom"
                 align="end"
                 sideOffset={4}
