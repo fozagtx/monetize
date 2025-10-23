@@ -17,18 +17,18 @@ import { Skeleton } from "@/components/ui/skeleton";
 async function getProduct(id: string) {
   try {
     const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_APP_URL || "https://monetize-sh.vercel.app"
-        : "http://localhost:3000";
+      process.env.NEXT_PUBLIC_APP_URL || "https://monetize-sh.vercel.app";
 
     const response = await fetch(`${baseUrl}/api/products?id=${id}`, {
       cache: "no-store",
     });
 
     if (!response.ok) return null;
-    return await response.json();
+    const data = await response.json();
+    if (!data || !data.title) return null;
+    return data;
   } catch (error) {
-    console.error("[v0] Error fetching product:", error);
+    console.error("[getProduct] Error fetching product:", error);
     return null;
   }
 }
