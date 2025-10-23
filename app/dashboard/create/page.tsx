@@ -1,4 +1,4 @@
-import { CreateProductForm } from "@/components/create-product-form"
+import { CreateProductForm } from "@/components/createProductForm";
 
 export default function CreatePage() {
   return (
@@ -12,12 +12,13 @@ export default function CreatePage() {
           <div className="mb-8 text-center">
             <h2 className="mb-3 text-3xl font-bold">Create Your Product</h2>
             <p className="text-lg text-muted-foreground">
-              Add your product details and get a shareable payment link to accept USDC on Base
+              Add your product details and get a shareable payment link to
+              accept USDC on Base
             </p>
           </div>
           <CreateProductForm />
         </div>
       </div>
     </div>
-  )
+  );
 }
