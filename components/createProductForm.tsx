@@ -91,114 +91,121 @@ export function CreateProductForm() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create New Digital Product</CardTitle>
-        <CardDescription>
-          Fill out the details for your digital product
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="title">Product Title</Label>
-            <Input
-              id="title"
-              name="title"
-              placeholder="My Awesome Digital Product"
-              required
-            />
-          </div>
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-b from-[#F9FAFB] to-[#F0F2F5] overflow-hidden px-4 py-10">
+      <div className="pointer-events-none absolute inset-0 bg-[url('/noise.png')] opacity-[0.15] mix-blend-soft-light" />
 
-          <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              name="description"
-              placeholder="Describe what buyers will get..."
-              rows={4}
-              required
-            />
-          </div>
+      <Card className="relative w-full max-w-2xl rounded-2xl bg-white/80 backdrop-blur-xl  border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 z-10">
+        <CardHeader>
+          {/*<CardTitle className="text-xl font-semibold text-gray-900">
+            Add A New Digital Product
+          </CardTitle>*/}
+          {/*<CardDescription className="text-gray-500">
+            Fill out the details for your digital product
+          </CardDescription>*/}
+        </CardHeader>
 
-          <div className="space-y-2">
-            <Label htmlFor="productUrl">Product URL</Label>
-            <Input
-              id="productUrl"
-              name="productUrl"
-              type="url"
-              placeholder="https://example.com/download/product"
-              required
-            />
-            <p className="text-sm text-muted-foreground">
-              Link where buyers can access the product after payment
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="paymentAddress">Your Base Wallet Address</Label>
-            <Input
-              id="paymentAddress"
-              name="paymentAddress"
-              placeholder="0x..."
-              pattern="^0x[a-fA-F0-9]{40}$"
-              required
-            />
-            <p className="text-sm text-muted-foreground">
-              USDC payments will be sent to this address on Base
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="priceUsdc">Price (USDC)</Label>
-            <Input
-              id="priceUsdc"
-              name="priceUsdc"
-              type="number"
-              step="0.01"
-              min="0.01"
-              placeholder="9.99"
-              required
-            />
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="creatorName">Your Name (Optional)</Label>
+              <Label htmlFor="title">Product Title</Label>
               <Input
-                id="creatorName"
-                name="creatorName"
-                placeholder="John Doe"
+                id="title"
+                name="title"
+                placeholder="My Awesome Digital Product"
+                required
               />
             </div>
+
             <div className="space-y-2">
-              <Label htmlFor="creatorEmail">Your Email (Optional)</Label>
-              <Input
-                id="creatorEmail"
-                name="creatorEmail"
-                type="email"
-                placeholder="john@example.com"
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                placeholder="Describe what buyers will get..."
+                rows={4}
+                required
               />
             </div>
-          </div>
 
-          <Button
-            type="submit"
-            className="w-full"
-            size="lg"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating Product…
-              </>
-            ) : (
-              "Add product"
-            )}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+            <div className="space-y-2">
+              <Label htmlFor="productUrl">Product URL</Label>
+              <Input
+                id="productUrl"
+                name="productUrl"
+                type="url"
+                placeholder="https://example.com/download/product"
+                required
+              />
+              <p className="text-sm text-gray-500">
+                Link where buyers can access the product after payment
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="paymentAddress">Your Base Wallet Address</Label>
+              <Input
+                id="paymentAddress"
+                name="paymentAddress"
+                placeholder="0x..."
+                pattern="^0x[a-fA-F0-9]{40}$"
+                required
+              />
+              <p className="text-sm text-gray-500">
+                USDC payments will be sent to this address on Base
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="priceUsdc">Price (USDC)</Label>
+              <Input
+                id="priceUsdc"
+                name="priceUsdc"
+                type="number"
+                step="0.01"
+                min="0.01"
+                placeholder="9.99"
+                required
+              />
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="creatorName">Your Name (Optional)</Label>
+                <Input
+                  id="creatorName"
+                  name="creatorName"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="creatorEmail">Your Email (Optional)</Label>
+                <Input
+                  id="creatorEmail"
+                  name="creatorEmail"
+                  type="email"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full rounded-full bg-black text-white hover:bg-gray-900 transition-all font-medium"
+              size="lg"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating Product…
+                </>
+              ) : (
+                "Add product"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

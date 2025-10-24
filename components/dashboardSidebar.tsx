@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,6 +28,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Home, Package, Plus, LogOut, User } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 interface DashboardSidebarProps {
   user: SupabaseUser;
@@ -36,21 +38,38 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const menuItems = [
+  const menuItems: {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+  }[] = [
     {
       title: "Dashboard",
-      icon: Home,
+      icon: <Home className="size-4" />,
       href: "/dashboard",
     },
     {
       title: "My Products",
-      icon: Package,
+      icon: <Package className="size-4" />,
       href: "/dashboard/products",
     },
     {
       title: "Create Product",
-      icon: Plus,
+      icon: <Plus className="size-4" />,
       href: "/dashboard/create",
+    },
+    {
+      title: "Discord Community",
+      icon: (
+        <Image
+          src="/discord.png"
+          alt="Discord"
+          width={16}
+          height={16}
+          className="rounded-sm"
+        />
+      ),
+      href: "/dashboard/discord",
     },
   ];
 
@@ -70,7 +89,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     <Sidebar
       variant="floating"
       collapsible="icon"
-      className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-lg "
+      className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-lg"
     >
       <SidebarHeader>
         <SidebarMenu>
@@ -118,8 +137,8 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                         "bg-[#F9FAFB] text-primary font-medium",
                     )}
                   >
-                    <Link href={item.href}>
-                      <item.icon className="size-4" />
+                    <Link href={item.href} className="flex items-center gap-2">
+                      {item.icon}
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -154,6 +173,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                   </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent
                 className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg shadow-lg"
                 side="bottom"
