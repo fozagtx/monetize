@@ -1,56 +1,60 @@
-# Monetize
+# Whop Templates Landing Page
 
-A platform that empowers creators to monetize digital content and Discord communities through seamless crypto payments on **Base**.
+A modern, responsive landing page for a Whop template marketplace built with Astro and Tailwind CSS.
 
-## Overview
+## 🚀 Features
 
-**Monetize** lets you sell digital products or gated community access using fast, low-cost USDC payments on the Base blockchain.
-Creators can launch their own monetization pages, manage payments, and link Discord roles or content access automatically.
+- **Modern Design**: Beautiful gradient backgrounds with glassmorphism effects
+- **Fully Responsive**: Mobile-first design that looks great on all devices
+- **Fast Performance**: Built with Astro for optimal loading speeds
+- **Tailwind CSS**: Utility-first CSS framework for rapid styling
+- **SEO Optimized**: Proper meta tags and semantic HTML
 
-## Features
+## 📦 Project Structure
 
-- **Digital Product Sales:** Upload and sell any digital product with instant USDC payments.
-- **Base Blockchain Integration:** Receive USDC directly to your Base wallet, with near-zero gas fees.
-- **Dashboard Analytics:** Track product sales, total revenue, and recent transactions in a clean, minimal dashboard.
-- **Discord Monetization (Coming Soon):** Connect Discord servers to sell community access or roles using crypto.
-- **Modern UI:** Built with Next.js, Tailwind CSS, and shadcn/ui for a smooth and modern experience.
+```
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       └── global.css
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
+```
 
-## Tech Stack
+## 🧞 Commands
 
-- **Frontend:** Next.js 14 (App Router), React, Tailwind CSS
-- **UI Components:** shadcn/ui
-- **Auth & Database:** Supabase
-- **Payments:** Base Pay sdk (USDC)
-- **Styling Enhancements:** CSS noise texture, smooth gradients, and blurred cards
+All commands are run from the root of the project, from a terminal:
 
-## Setup
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
 
-Clone the repository and install dependencies:
+## 🎨 Sections
 
-```bash
-git clone https://github.com/fozagtx/monetize.git
-cd monetize
-npm install
+The landing page includes:
 
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+1. **Navigation Bar** - Sticky header with logo and menu
+2. **Hero Section** - Eye-catching headline with CTAs and stats
+3. **Templates Section** - Showcase of featured template cards
+4. **Features Section** - Grid of key features and benefits
+5. **Pricing Section** - Three-tier pricing plans (Starter, Pro, Enterprise)
+6. **CTA Section** - Final call-to-action before footer
+7. **Footer** - Links and social media icons
 
-monetize/
-│
-├── app/
-│   ├── dashboard/
-│   ├── product/
-│   └── (auth)/
-│
-├── components/
-│   ├── ui/
-│   └── layout/
-│
-├── lib/
-│   ├── supabase/
-│   └── utils.ts
-│
-└── public/
-    ├── logo.jpeg
-    ├── discord.png
-    └── noise.jpeg
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Static site generator
+- [Tailwind CSS v4](https://tailwindcss.com) - Styling
+- TypeScript - Type safety
+
+## 📝 License
+
+MIT
