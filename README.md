@@ -1,28 +1,56 @@
 # Monetize
 
-Platform for creators to monetize digital content and Discord communities with crypto payments on Base.
+A platform that empowers creators to monetize digital content and Discord communities through seamless crypto payments on **Base**.
 
-![Monetize Platform](/placeholder.svg?height=400&width=800&query=modern+crypto+payment+platform+dashboard)
+## Overview
 
-## Demo
+**Monetize** lets you sell digital products or gated community access using fast, low-cost USDC payments on the Base blockchain.
+Creators can launch their own monetization pages, manage payments, and link Discord roles or content access automatically.
 
-[🎥 Watch Monetize in action](#)
+## Features
 
-**Sell digital products and Discord access with recurring crypto payments on Base blockchain**
+- **Digital Product Sales:** Upload and sell any digital product with instant USDC payments.
+- **Base Blockchain Integration:** Receive USDC directly to your Base wallet, with near-zero gas fees.
+- **Dashboard Analytics:** Track product sales, total revenue, and recent transactions in a clean, minimal dashboard.
+- **Discord Monetization (Coming Soon):** Connect Discord servers to sell community access or roles using crypto.
+- **Modern UI:** Built with Next.js, Tailwind CSS, and shadcn/ui for a smooth and modern experience.
 
-![Screenshot](/placeholder.svg?height=600&width=1200&query=product+marketplace+with+discord+integration)
+## Tech Stack
 
-**So simple even your grandma can accept crypto payments 😌**
+- **Frontend:** Next.js 14 (App Router), React, Tailwind CSS
+- **UI Components:** shadcn/ui
+- **Auth & Database:** Supabase
+- **Payments:** Base Pay sdk (USDC)
+- **Styling Enhancements:** CSS noise texture, smooth gradients, and blurred cards
 
-## What It Does for Creators
+## Setup
 
-Monetize gives you powerful tools to turn your content and community into revenue:
+Clone the repository and install dependencies:
 
-- **Digital Product Sales:** Upload and sell any digital product with one-time USDC payments
-- **Base Blockchain Payments:** Accept USDC on Base with minimal gas fees and instant settlements
+```bash
+git clone https://github.com/fozagtx/monetize.git
+cd monetize
+npm install
 
-## Real-World Usage Examples
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-### **Selling a Digital Course**
-
-> I have a video course on web development. I upload the course details, set my Base wallet address, price it at $49 USDC, and share the payment link. Buyers pay with crypto and instantly get access to the course URL.
+monetize/
+│
+├── app/
+│   ├── dashboard/
+│   ├── product/
+│   └── (auth)/
+│
+├── components/
+│   ├── ui/
+│   └── layout/
+│
+├── lib/
+│   ├── supabase/
+│   └── utils.ts
+│
+└── public/
+    ├── logo.jpeg
+    ├── discord.png
+    └── noise.jpeg
