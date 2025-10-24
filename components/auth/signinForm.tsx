@@ -54,7 +54,7 @@ export function SignInForm() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#f9fafb] text-gray-900">
+    <div className="flex min-h-screen flex-col items-center justify-center text-gray-900">
       <Card className="bg-transparent shadow-none p-8 w-full max-w-md text-center">
         <div className="flex justify-center mb-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white">

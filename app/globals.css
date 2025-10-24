@@ -1,6 +1,23 @@
 @import "tailwindcss";
 
-@theme {
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-gradient-move {
+    background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite;
+}
+
+/*@theme {
     --background: #f9fafb;
     --foreground: #111827;
     --card: #ffffff;
@@ -24,7 +41,7 @@
     --radius: 0.5rem;
 
     --font-sans: "Inter", "SF Pro Display", "Helvetica Neue", sans-serif;
-}
+}*/
 
 body {
     background-color: var(--background);

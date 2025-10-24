@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -36,6 +39,23 @@ export default function ProductClient({
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-16">
       <div className="container mx-auto max-w-6xl px-6">
+        {/* Logo Section */}
+        <div className="flex justify-center mb-12">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.jpeg"
+              alt="Monetize Logo"
+              width={48}
+              height={48}
+              className="rounded-lg shadow-sm"
+            />
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+              Monetize
+            </h1>
+          </div>
+        </div>
+
+        {/* Product Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left column */}
           <div className="space-y-8">
@@ -110,7 +130,9 @@ export default function ProductClient({
                     <div className="rounded-lg bg-muted/40 p-4">
                       <p className="mb-2 text-sm font-medium">Payment Link</p>
                       <p className="break-all font-mono text-sm text-muted-foreground">
-                        {window?.location?.origin || ""}
+                        {typeof window !== "undefined"
+                          ? window.location.origin
+                          : ""}
                         {paymentLink}
                       </p>
                     </div>
@@ -151,6 +173,15 @@ function ProductSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-16 animate-pulse">
       <div className="container mx-auto max-w-6xl px-6">
+        {/* Logo Skeleton */}
+        <div className="flex justify-center mb-12">
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-12 w-12 rounded-lg" />
+            <Skeleton className="h-6 w-32" />
+          </div>
+        </div>
+
+        {/* Product Skeleton */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
             <Card className="p-6 bg-card/70 shadow-sm border-0 backdrop-blur-sm">

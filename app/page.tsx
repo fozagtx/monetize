@@ -1,115 +1,161 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Package,
+  DollarSign,
+  TrendingUp,
+  Plus,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 
-export default async function HomePage() {
+export default async function DashboardPage() {
   const supabase = await getSupabaseServerClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: products } = await supabase
+    .from("products")
+    .select("id, title, price_usdc, created_at")
+    .eq("user_id", user?.id)
+    .order("created_at", { ascending: false });
+
+  const { data: payments } = await supabase
+    .from("payments")
+    .select("amount_usdc, product_id")
+    .in("product_id", products?.map((p) => p.id) || []);
+
+  const totalProducts = products?.length || 0;
+  const totalRevenue =
+    payments?.reduce((sum, payment) => sum + Number(payment.amount_usdc), 0) ||
+    0;
+  const totalSales = payments?.length || 0;
+
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#f9fafb] text-gray-900">
-      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.05] pointer-events-none" />
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#FAFAFA] to-[#F5F7FA] relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[url('/noise.png')] opacity-[0.12] mix-blend-soft-light" />
 
-      <header className="relative z-20 mx-auto w-full max-w-6xl px-6 py-8 md:px-8">
-        <nav className="relative flex items-center justify-between text-sm font-medium rounded-full bg-white/80 backdrop-blur-md border border-gray-200 shadow-sm px-6 py-3">
-          <Link
-            href="/"
-            className="flex items-center gap-3 text-2xl text-gray-900"
-          >
-            <h1 className="flex items-center justify-center rounded-full bg-white px-3 py-1 text-base font-semibold tracking-tight shadow-sm">
-              Monetize
-            </h1>
-          </Link>
-          <div className="flex items-center gap-5">
-            <Link
-              href="/auth/signin"
-              className="rounded-full border border-gray-300 bg-white/70 px-5 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 shadow-sm"
-            >
-              Login
-            </Link>
-            <Button
-              asChild
-              size="sm"
-              className="rounded-full bg-black text-white hover:bg-gray-800 shadow-md px-5 py-2"
-            >
-              <Link href="/auth/signup">Sign Up</Link>
-            </Button>
-          </div>
-        </nav>
-      </header>
-
-      {/* Hero Decorative Images */}
-      <div className="absolute top-[30%] left-[5%] -translate-y-1/2 rotate-180 opacity-80 z-0">
-        <Image
-          src="/skillL.png"
-          alt="Skill Illustration Left"
-          width={320}
-          height={320}
-          className="select-none pointer-events-none object-contain drop-shadow-lg"
-        />
-      </div>
-
-      <div className="absolute top-[30%] right-[5%] -translate-y-1/2 opacity-80 z-0">
-        <Image
-          src="/skillR.png"
-          alt="Skill Illustration Right"
-          width={320}
-          height={320}
-          className="select-none pointer-events-none object-contain drop-shadow-lg"
-        />
-      </div>
-
-      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6 pb-32 pt-10 text-center md:px-8">
-        <div className="mb-4 relative z-10 animate-pulse">
-          <span className="inline-block rounded-full bg-gray-200/70 px-3 py-1 text-xs font-medium text-gray-600 shadow-sm">
-            powered by Base
-          </span>
-        </div>
-
-        <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-6xl md:text-7xl relative z-10">
-          Monetize your skills on Base
+      <div className="flex-1 space-y-10 p-8 max-w-6xl mx-auto w-full">
+        <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+          Dashboard Overview
         </h1>
 
-        <p className="mt-6 max-w-2xl text-pretty text-lg text-gray-600 sm:text-xl relative z-10">
-          Add product to start selling!
-        </p>
-
-        <div className="mt-20 flex flex-col items-center gap-6 w-full relative z-10">
-          <div className="relative w-full max-w-5xl mx-auto rounded-[1.75rem] bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 backdrop-blur-md pt-7 pb-4 px-4 z-10">
-            <div className="absolute top-3 left-6 flex gap-2">
-              <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-              <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-              <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+        <div className="grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: "Total Products",
+              value: totalProducts,
+              icon: Package,
+              note: "Active listings",
+            },
+            {
+              title: "Total Sales",
+              value: totalSales,
+              icon: TrendingUp,
+              note: "Completed transactions",
+            },
+            {
+              title: "Total Revenue",
+              value: `$${totalRevenue.toFixed(2)}`,
+              icon: DollarSign,
+              note: "USDC earned",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="relative rounded-2xl p-[1px] overflow-hidden transition-all duration-300 group"
+            >
+              <div className="absolute inset-0 bg-[conic-gradient(at_top_left,_#ff00ff,_#00ffff,_#ffff00,_#ff00ff)] opacity-75 group-hover:opacity-100 blur-[2px]" />
+              <Card className="relative z-10 bg-white/70 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-md transition-all">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    {item.title}
+                  </CardTitle>
+                  <item.icon className="h-5 w-5 text-gray-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-semibold text-gray-900">
+                    {item.value}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">{item.note}</p>
+                </CardContent>
+              </Card>
             </div>
-            <div className="overflow-hidden rounded-xl border border-gray-100 mt-3">
-              <iframe
-                className="w-full aspect-video rounded-xl"
-                src="https://www.youtube.com/embed/_eGTi6vJK_0?si=ipzjuPtfBhthn1hL"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
+          ))}
         </div>
-      </main>
 
-      <footer className="relative z-20 mx-auto w-full max-w-6xl px-6 pb-8 md:px-8 flex items-center justify-between text-sm text-gray-500">
-        <p className="animate-pulse">powered by Base</p>
-        <div className="flex items-center gap-4">
-          <Link href="#" className="hover:text-gray-900">
-            X
-          </Link>
-          <Link href="#" className="hover:text-gray-900">
-            Github
-          </Link>
+        <div className="relative rounded-2xl p-[1px] overflow-hidden transition-all duration-300 group">
+          <div className="absolute inset-0 bg-[conic-gradient(at_top_left,_#ff00ff,_#00ffff,_#ffff00,_#ff00ff)] opacity-75 group-hover:opacity-100 blur-[2px]" />
+          <Card className="relative z-10 bg-white/70 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-md transition-all">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold text-gray-800">
+                Recent Products
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {products && products.length > 0 ? (
+                <div className="space-y-4">
+                  {products.slice(0, 5).map((product) => (
+                    <div
+                      key={product.id}
+                      className="relative rounded-xl p-[1px] bg-[conic-gradient(at_top_left,_#ff00ff,_#00ffff,_#ffff00,_#ff00ff)] overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between bg-white/70 backdrop-blur-md rounded-xl px-6 py-4 transition-all hover:bg-white/90">
+                        <div>
+                          <p className="font-semibold text-gray-900">
+                            {product.title}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Created{" "}
+                            {new Date(product.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <p className="font-semibold text-gray-800">
+                            ${product.price_usdc} USDC
+                          </p>
+                          <Button
+                            asChild
+                            className="relative overflow-hidden rounded-full px-6 py-1.5 text-sm font-medium text-white bg-black hover:bg-gray-900 transition-all"
+                          >
+                            <Link href={`/product/${product.id}`}>
+                              <span className="flex items-center gap-1">
+                                View <ArrowRight className="h-4 w-4" />
+                              </span>
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <Package className="mb-4 h-12 w-12 text-gray-400" />
+                  <h3 className="mb-2 text-lg font-semibold text-gray-800">
+                    No products yet
+                  </h3>
+                  <p className="mb-4 text-sm text-gray-500">
+                    Create your first product to start accepting payments
+                  </p>
+                  <Button
+                    asChild
+                    className="relative overflow-hidden bg-black text-white rounded-full px-6 py-2 text-sm font-medium hover:bg-gray-900"
+                  >
+                    <Link href="/dashboard/create">
+                      <Plus className="mr-2 h-4 w-4" />
+                      Create Product
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

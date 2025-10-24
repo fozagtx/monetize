@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Sidebar,
@@ -23,7 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Home, Package, Plus, LogOut, User, Coins } from "lucide-react";
+import { Home, Package, Plus, LogOut, User } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
@@ -69,7 +70,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
     <Sidebar
       variant="floating"
       collapsible="icon"
-      className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-lg shadow-sm"
+      className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-lg "
     >
       <SidebarHeader>
         <SidebarMenu>
@@ -81,10 +82,14 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
                 asChild
                 className="flex-1 group-data-[collapsible=icon]:hidden"
               >
-                <Link href="/">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                    <Coins className="size-4" />
-                  </div>
+                <Link href="/" className="flex items-center gap-2">
+                  <Image
+                    src="/logo.jpeg"
+                    alt="Monetize Logo"
+                    width={32}
+                    height={32}
+                    className="rounded-md"
+                  />
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">Monetize</span>
                   </div>
